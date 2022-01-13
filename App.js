@@ -6,13 +6,10 @@
  * @flow strict-local
  */
 
-import { NavigationContainer } from '@react-navigation/native';
+
 import React  from 'react';
-import HomeNavigation from './src/navigation/HomeNavigation';
-//import MovieDetailsScreen from "./src/screens/movieDetails";
-//import {NavigationContainer} from "@react-navigation/native";
-//import DrawerNavigation from "./src/navigation/DrawerNavigation";
-//import SplashScreen from './src/screens/splash';
+import DrawerNavigation from "./src/navigation/DrawerNavigation";
+import { NavigationContainer } from '@react-navigation/native';
 
 
 
@@ -20,7 +17,7 @@ function App () {
 
   return (
       <NavigationContainer>
-        <HomeNavigation/>
+        <DrawerNavigation/>
       </NavigationContainer>
   );
 }

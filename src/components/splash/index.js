@@ -37,7 +37,7 @@ function Splash () {
 
     return (
         <View style={styles.container}>
-          <Image source={require("../../assets/images/splash.png")}/>
+          <Text style={styles.splashText}>MovieTime</Text>
         </View>
     );
 };

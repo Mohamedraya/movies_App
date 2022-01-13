@@ -41,12 +41,19 @@ function HomeMovies () {
 
     const [imgActive,setImgActive] = useState(0);
     const [mostPopular,setMostPopular] = useState([]);
+    const [upComing,setUpComing] = useState([]);
 
     useEffect(() => {
        axios.get("https://api.themoviedb.org/3/movie/popular?api_key=e7afa11e8652a24e75a9b127f4a9bc8e&language=en-US&page=1")
             .then((response) => {setMostPopular(response.data.results)})
             .catch((error) => console.log(error))
     },[]);
+
+    useEffect(() => {
+        axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=e7afa11e8652a24e75a9b127f4a9bc8e&language=en-US&page=1")
+             .then((response) => {setUpComing(response.data.results)})
+             .catch((error) => console.log(error))
+     },[]);
 
    const onchange = (nativeEvent) => {
 
@@ -91,15 +98,15 @@ function HomeMovies () {
            
            <FlatList data={mostPopular} keyExtractor={item => item.id} horizontal
            renderItem={({item}) => (<MovieItem name={item.title} rate={item.vote_average} imageUrl={"https://image.tmdb.org/t/p/w500"+item.poster_path}
-                                   onPress={() =>navigation.navigate("MovieDetailsScreen",item) }/>)}/>
+                                   onPress={() =>navigation.navigate("MovieDetailsScreen",item.id) }/>)}/>
           
           <View style={styles.wrapper}>
             <Text style={styles.title}>New Movies</Text>
             <Text style={styles.subTitle}>Show All</Text>
           </View>
 
-          <FlatList data={movies} keyExtractor={item => item.id} horizontal
-           renderItem={({item}) => (<SmallMovieItem name={item.name} rate={item.rate} imageUrl={item.image}/>)}/>          
+          <FlatList data={upComing} keyExtractor={item => item.id} horizontal
+           renderItem={({item}) => (<SmallMovieItem name={item.title} rate={item.vote_average} imageUrl={item.poster_path}/>)}/>          
         
         </View>
     );

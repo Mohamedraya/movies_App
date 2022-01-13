@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import {View,Text,Image,FlatList} from 'react-native';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -8,7 +8,7 @@ import CastImage from '../castImage';
 import CastPhoto from '../castphoto';
 import colors from '../../assets/theme/colors';
 import styles from './styles';
-import { useEffect } from 'react/cjs/react.development';
+
 import { useNavigation } from '@react-navigation/native';
 
 /*const casts = [{
@@ -37,7 +37,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function MovieDetails ({route}) {
 
-    const {item,movieId} = route.params;
+    const movieId = route.params;
     const navigation = useNavigation();
     const [casts,setCasts] = useState([]);
     const [movieDetails,setMovieDetails] = useState([]);
@@ -48,11 +48,6 @@ function MovieDetails ({route}) {
              .catch((error) => console.log(error))
      },[]);
 
-    useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=e7afa11e8652a24e75a9b127f4a9bc8e&language=en-US`)
-             .then((response) => {setCasts(response.data.results)})
-             .catch((error) => console.log(error))
-     },[]);
 
     return (
         <View>

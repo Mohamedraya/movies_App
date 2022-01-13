@@ -2,7 +2,7 @@ import React ,{useState}from 'react';
 import {Text,View,TouchableOpacity,TextInput} from 'react-native';
 import {useNavigation} from "@react-navigation/core";
 import {authentication} from "../../firebase/firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword ,updateProfile} from "firebase/auth";
 import Container from '../common/container/index';
 import Button from "../common/button/index";
 import styles from './styles';
@@ -11,6 +11,7 @@ import styles from './styles';
 const SignupComponent = () => {
 
     const navigation = useNavigation();
+    const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
@@ -19,7 +20,12 @@ const SignupComponent = () => {
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
-            navigation.navigate("LoginScreen")})
+            console.log(user);
+
+            updateProfile(user,{displayName: name})
+            .then()
+            .catch(error => console.log(error));
+            })
         .catch((err) => {console.log(err);})
     }
 
@@ -30,8 +36,8 @@ const SignupComponent = () => {
                <Text style={styles.title}>Welcome to Movietime!</Text>
                <Text style={styles.subTitle}>Your Personal guide to the world of cinema</Text>
             <View style={styles.form}>
-            <TextInput style={styles.input} placeholder="UserName" value={username} 
-                       onChangeText={text => setUsername(text)}/>
+            <TextInput style={styles.input} placeholder="UserName" value={name} 
+                       onChangeText={text => setName(text)}/>
             <TextInput style={styles.input} placeholder="Email" value={email} 
                        onChangeText={text => setEmail(text)}/>
             <TextInput style={styles.input} placeholder="Password" value={password} 
