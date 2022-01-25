@@ -14,7 +14,7 @@ export default StyleSheet.create({
 
     rateView: {
         flexDirection: "row",
-        paddingLeft: 180,
+        paddingLeft: 120,
         paddingBottom: 70
     },
 
@@ -45,7 +45,7 @@ export default StyleSheet.create({
     },
 
     rateText: {
-        fontSize: 20,
+        fontSize: 15,
         paddingLeft: 10,
 
     },

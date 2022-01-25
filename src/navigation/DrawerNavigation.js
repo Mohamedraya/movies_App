@@ -16,7 +16,7 @@ const Drawer = createDrawerNavigator();
         <Drawer.Navigator
             drawerContent={ (props) => <CustomDrawer { ...props } /> }
             initialRouteName={ 'Home' }
-            screenOptions={ { headerTintColor:colors.white } }
+            screenOptions={ { headerShown: false } }
         >
             <Drawer.Screen
                 name="Home"

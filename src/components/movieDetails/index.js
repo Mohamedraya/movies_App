@@ -1,9 +1,9 @@
-import React ,{useEffect}from 'react';
-import {View,Text,Image,FlatList} from 'react-native';
+import React ,{useEffect,useState}from 'react';
+import {View,Text,Image,FlatList, ScrollView} from 'react-native';
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import axios from "axios";
-import AppHeader from "../../components/appheader";
+import DetailsHeader from '../DetailsHeader';
 import CastImage from '../castImage';
 import CastPhoto from '../castphoto';
 import colors from '../../assets/theme/colors';
@@ -11,7 +11,7 @@ import styles from './styles';
 
 import { useNavigation } from '@react-navigation/native';
 
-/*const casts = [{
+const casts = [{
     image:  "https://reactjs.org/logo-og.png",
     name: "Titanic",
     id: '58694a0f-3da1-471f-bd96-145571e29d72'
@@ -33,36 +33,31 @@ import { useNavigation } from '@react-navigation/native';
     name: "Titnic",
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b',
 },
-]*/
+]
 
-function MovieDetails ({route}) {
+function MovieDetails () {
 
-    const movieId = route.params;
+
     const navigation = useNavigation();
-    const [casts,setCasts] = useState([]);
+    //const [casts,setCasts] = useState([]);
     const [movieDetails,setMovieDetails] = useState([]);
 
-    useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=e7afa11e8652a24e75a9b127f4a9bc8&language=en-US`)
-             .then((response) => {setMovieDetails(response.data.results)})
-             .catch((error) => console.log(error))
-     },[]);
+   
 
 
     return (
-        <View>
-          <AppHeader back optionalIcon="heart" optionalFun={()=>console.log("")}
-                     right="ellipsis-vertical" iconColor={colors.white} headerBg={colors.light}/>  
-          <Image source={{uri: "https://reactjs.org/logo-og.png"}} style={styles.backgimg}/>           
+        <ScrollView>
+          <DetailsHeader/>  
+          <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz4dLuZsvF5o--DTrPSgQi2RKcQRHogV43iw&usqp=CAU"}} style={styles.backgimg}/>           
           <View style={styles.wrapper}>
-              <Image source={{uri: item.poster_path}} style={styles.img}/>
-              <Text style={styles.movName}>{item.title}</Text>          
+              <Image source={{uri: "https://i.ytimg.com/vi/MJuFdpVCcsY/movieposter_en.jpg"}} style={styles.img}/>
+              <Text style={styles.movName}>Matrix Movie</Text>          
           </View>
           <View style={styles.rateView}>      
-                <MaterialIcons name="star-rate" color={colors.yellow} size={30}/>
-                <Text style={styles.rateTxt}>{item.vote_average}</Text>                                
-                <Ionicons name="time-outline" color={colors.dark} size={30} style={styles.icon}/>
-                <Text style={styles.rateTxt}>2h 29min</Text>                
+                <MaterialIcons name="star-rate" color={colors.yellow} size={23}/>
+                <Text style={styles.rateTxt}>7.4</Text>                                
+                <Ionicons name="time-outline" color={colors.dark} size={23} style={styles.icon}/>
+                <Text style={styles.rateTxt}>2h 36min</Text>                
           </View>
           <View style={styles.movType}>
              <View style={styles.typView}>
@@ -84,8 +79,8 @@ function MovieDetails ({route}) {
                  <Text style={styles.detailsTxt}>Box Office:</Text>
               </View>
               <View style={styles.details}>
-                 <Text style={styles.dateTxt}>{item.release_date}</Text>
-                 <Text style={styles.dircText}>{item.original_title}</Text>
+                 <Text style={styles.dateTxt}>Feidge</Text>
+                 <Text style={styles.dircText}>Feidge</Text>
                  <Text style={styles.dircText}>Kevien Feidge</Text>
                  <Text style={styles.dircText}>Alan Silvister</Text>
                  <Text style={styles.dateTxt}>$2.049 billion</Text>
@@ -93,19 +88,22 @@ function MovieDetails ({route}) {
           </View>
 
           <Text style={styles.storyTitle}>STORYLINE</Text>
-          <Text style={styles.story}>{item.overview}</Text>
+          <Text style={styles.story}>Feidge</Text>
         
           <Text style={styles.cast}>CAST</Text>
           <FlatList data={casts} keyExtractor={item => item.id} horizontal
-                    renderItem={({item}) => (<CastImage name={item.character} imageUrl={item.profile_path} onPress={() =>navigation.navigate("CastDetailsScreen",item)}/>)}/>
+                    renderItem={({item}) => (<CastImage name={item.name} imageUrl={item.image} onPress={() =>navigation.navigate("CastDetailsScreen")}/>)}/>
          
          <Text style={styles.cast}>Photo</Text>
          <FlatList data={casts} keyExtractor={item => item.id} horizontal
-                   renderItem={({item}) => (<CastPhoto  imageUrl={item.profile_path}/>)}/>
-        </View>
+                   renderItem={({item}) => (<CastPhoto  imageUrl={item.image}/>)}/>
+        </ScrollView>
     );
 }
 
 export default MovieDetails;
 
-//<Image source={{uri: "https://reactjs.org/logo-og.png"}} style={styles.backgimg}/>
+/*<Image source={{uri: "https://reactjs.org/logo-og.png"}} style={styles.backgimg}/>
+
+<AppHeader back optionalIcon="heart" optionalFun={()=>console.log("")}
+                     right="ellipsis-vertical" iconColor={colors.black} />*/

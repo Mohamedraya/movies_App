@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeMovies from '../../components/homemovies';
+import HomeMovies from '../../components/homemovies/index';
 
 function HomeScreen () {
 

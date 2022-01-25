@@ -18,5 +18,9 @@ export default StyleSheet.create({
         fontSize: 18,
         color: colors.dark,
         
+    },
+
+    rateView: {
+        flexDirection: "row"
     }
 });

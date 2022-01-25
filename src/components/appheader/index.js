@@ -1,3 +1,4 @@
+import React from "react";
 import {View,Text, TouchableOpacity} from "react-native";
 import {Surface} from "react-native-paper";
 import { useNavigation } from "@react-navigation/core";
@@ -7,14 +8,14 @@ import colors from "../../assets/theme/colors";
 import styles from "./styles";
 
 
-const AppHeader = ({menu,back,title,optionalIcon,optionalFun,right,iconColor,headerBg}) => {
+const AppHeader = ({menu,back,title,optionalIcon,optionalFun,right,iconColor}) => {
 
     const navigation = useNavigation();
 
     return (
-        <Surface style={[styles.header,{backgroundColor: headerBg}]}>
+        <Surface style={styles.header}>
             <View style={styles.view}>
-                {menu &&<TouchableOpacity onPress={() => navigation.optionDrawer()}>
+                {menu &&<TouchableOpacity onPress={() => navigation.openDrawer()}>
                     <Feather name="menu" size={24} color={iconColor}/>
                  </TouchableOpacity>}
 

@@ -11,8 +11,8 @@ export default StyleSheet.create({
     },
 
     img: {
-        width: 160,
-        height: 160,
+        width: 130,
+        height: 130,
         borderRadius: 80
     },
 
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     info: {
         flexDirection: "row",
         paddingLeft: 2,
-        marginTop: 20
+        marginTop: 15
     },
 
     detailsTxt: {

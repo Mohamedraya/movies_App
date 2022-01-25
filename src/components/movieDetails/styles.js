@@ -39,7 +39,7 @@ export default StyleSheet.create({
     },
 
     rateTxt: {
-        fontSize: 20,
+        fontSize: 18,
         marginLeft: 10,
         marginTop: 5
     },
@@ -54,17 +54,17 @@ export default StyleSheet.create({
 
     movType: {
         flexDirection: "row",
-        //paddingHorizontal: 25,
-        marginLeft: 110
+        marginLeft: 115
     },
 
     typView: {
         width: 70,
         height: 25,
-        backgroundColor: colors.light,
+        backgroundColor: colors.grey,
         justifyContent: "center",
         alignItems: "center",
-        marginHorizontal: 15
+        borderRadius: 12,
+        marginHorizontal: 6
     },
 
     detailsContainer: {

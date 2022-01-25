@@ -1,27 +1,45 @@
 import React ,{useState}from 'react';
 import {Text,View,TouchableOpacity,TextInput} from 'react-native';
-import {useNavigation} from "@react-navigation/core";
-import {authentication} from "../../firebase/firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {useNavigation} from "@react-navigation/native";
+//import { signInWithEmailAndPassword ,getAuth} from "firebase/auth";
+import {auth} from "../../firebase/firebaseConfig";
+import firebase from "../../firebase/firebaseConfig";
 import Container from '../common/container/index';
 import Button from "../common/button/index";
 import styles from './styles';
 
 
+
 const LoginComponent = () => {
 
     const navigation = useNavigation();
-    const [isLoginIn,setIsLoginIn] = useState("");
+    //const [isLoginIn,setIsLoginIn] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
-    const loginUser = () => {
-        signInWithEmailAndPassword(authentication,email,password)
+    //const auth = getAuth();
+
+    const loginUser =  () => {
+        
+      auth
+      .signInWithEmailAndPassword(email,password)
+      .then((userCredential) => {
+        const user = userCredential.user; 
+             navigation.navigate("HomeScreen")
+        
+        
+      })
+      .catch(error => {console.log(error)});
+    
+  
+        /*signInWithEmailAndPassword(auth,email,password)
         .then((userCredential) => {
             // Signed in 
-            const user = userCredential.user; setIsLoginIn(true)
-                        navigation.navigate("HomeScreen")})
-        .catch((err) => {console.log(err);})
+             const user = userCredential.user; 
+             navigation.navigate("HomeScreen")
+             return user;}
+                        )
+        .catch((err) => {console.log(err);})*/
     }
 
     return (
@@ -33,13 +51,13 @@ const LoginComponent = () => {
             <TextInput style={styles.input} placeholder="Email" value={email} 
                        onChangeText={text => setEmail(text)}/>
             <TextInput style={styles.input} placeholder="Password" value={password} 
-                       onChangeText={text => setPassword(text)}/>
+                       onChangeText={text => setPassword(text)} secureTextEntry/>
               <Text style={styles.ques}>forgot Your Password?</Text>
               <Button title="SIGN IN" onPress={loginUser}/>
 
               <View style={styles.createSection}>
                <Text style={styles.infoText}>Need a new account?</Text>
-               <TouchableOpacity onPress={() => {navigation.navigate("SignupScreen")}}>
+               <TouchableOpacity onPress={() => navigation.navigate('SignupScreen')}>
                    <Text style={styles.regsText}>SIGN UP</Text>
                </TouchableOpacity>
               </View>

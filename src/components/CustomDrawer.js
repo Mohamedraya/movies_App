@@ -2,12 +2,20 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { DrawerItem } from '@react-navigation/drawer';
+import {auth} from "../firebase/firebaseConfig";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import  colors  from '../assets/theme/colors';
 
 
  function CustomDrawer({ navigation, ...props }) {
+
+   
+    const handleSignOut = () => {
+      auth.signOut().then(() => {
+        navigation.navigate("LoginScreen");
+      }).catch((err) => {console.log(err)});
+    };
 
   return (
 
@@ -76,14 +84,13 @@ import  colors  from '../assets/theme/colors';
       />
 
 
-      <View style={{ marginLeft: 8, marginTop: 230 }}>
+      <View style={{ marginLeft: 8, marginTop: 100 }}>
         <DrawerItem
           label="Logout"
           icon={({ focused, color, size }) => (
-            <AntDesign color={colors.black} size={30} name={
-              focused ? 'logout' : 'logout'} />
+            <AntDesign color={colors.black} size={30} name={'logout'} />
           )}
-          onPress={ () => {console.log("bye")}}
+          onPress={handleSignOut}
         />
       </View>
     </View >

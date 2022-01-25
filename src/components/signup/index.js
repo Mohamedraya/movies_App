@@ -1,33 +1,49 @@
 import React ,{useState}from 'react';
 import {Text,View,TouchableOpacity,TextInput} from 'react-native';
-import {useNavigation} from "@react-navigation/core";
-import {authentication} from "../../firebase/firebaseConfig";
-import { createUserWithEmailAndPassword ,updateProfile} from "firebase/auth";
+import {useNavigation} from "@react-navigation/native";
+//import { createUserWithEmailAndPassword ,updateProfile ,getAuth} from "firebase/auth";
+import {auth} from "../../firebase/firebaseConfig";
 import Container from '../common/container/index';
 import Button from "../common/button/index";
 import styles from './styles';
 
 
-const SignupComponent = () => {
+function SignupComponent  ()  {
 
     const navigation = useNavigation();
     const [name,setName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
-    const signupUser = () => {
-        createUserWithEmailAndPassword(authentication,email,password)
+    //const auth = getAuth();
+
+    const signupUser =  () => {
+
+        auth.createUserWithEmailAndPassword(email,password)
+        .then((res) => {
+            res.user.updateProfile({
+              displayName: name
+            })
+            console.log('User registered successfully!');
+           
+            navigation.navigate('LoginScreen');
+          })
+          .catch(error => {console.log(error)})      
+        }
+      
+         /*createUserWithEmailAndPassword(auth,email,password)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
             console.log(user);
+            navigation.navigate("LoginScreen");
 
             updateProfile(user,{displayName: name})
             .then()
             .catch(error => console.log(error));
             })
-        .catch((err) => {console.log(err);})
-    }
+        .catch((err) => {console.log(err);})*/
+    
 
 
     return (
@@ -46,7 +62,7 @@ const SignupComponent = () => {
 
               <View style={styles.createSection}>
                <Text style={styles.infoText}>Need a new account?</Text>
-               <TouchableOpacity onPress={() => {navigation.navigate("loginScreen")}}>
+               <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
                    <Text style={styles.regsText}>LOGIN</Text>
                </TouchableOpacity>
               </View>

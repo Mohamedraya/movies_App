@@ -1,5 +1,6 @@
-import React from 'react';
+import React ,{useEffect,useState}from 'react';
 import {View,Text,Image,FlatList, ScrollView} from 'react-native';
+import axios from "axios";
 import CastPhoto from "../castphoto";
 import MovieItem from '../movieitem';
 import ListItem from '../listitem';
@@ -29,14 +30,20 @@ const movies = [{
 
 ]
 
-function CastDetails ({route}) {
+function CastDetails () {
 
-    const {item,castId} = route.params;
+    const [mostPopular,setMostPopular] = useState([]);
+
+    useEffect(() => {
+        axios.get("https://api.themoviedb.org/3/movie/popular?api_key=e7afa11e8652a24e75a9b127f4a9bc8e&language=en-US&page=1")
+             .then((response) => {setMostPopular(response.data.results)})
+             .catch((error) => console.log(error))
+     },[]);
 
     return (
         <ScrollView>
             <View style={styles.castInfo}>
-               <Image source={{uri: profile_path}} style={styles.img}/>
+               <Image source={{uri: "https://reactjs.org/logo-og.png"}} style={styles.img}/>
                <View style={styles.castName}>
                    <Text style={styles.name}>ROBERT DOWNEY JR.</Text>
                    <Text style={styles.subName}>Actor, Producer, writer</Text>
@@ -69,12 +76,12 @@ function CastDetails ({route}) {
                <Text style={styles.subTitle}>Show All</Text>
             </View>
 
-            <FlatList data={movies} keyExtractor={item => item.id} horizontal
-                      renderItem={({item}) => (<MovieItem name={item.name} imageUrl={item.image} rate={item.year}/>)}/>
+            <FlatList data={mostPopular} keyExtractor={item => item.id} horizontal
+                      renderItem={({item}) => (<MovieItem name={item.title} imageUrl={item.poster_path} rate={item.vote_average}/>)}/>
         
             <Text style={styles.flatTitle}>ALL MOVIES</Text>
-            <FlatList data={movies} keyExtractor={item => item.id}
-                      renderItem={({item}) => (<ListItem imageUrl={item.image}/>)}/>
+            <FlatList data={mostPopular} keyExtractor={item => item.id}
+                      renderItem={({item}) => (<ListItem imageUrl={item.poster_path} title={item.title} rate={item.vote_average}/>)}/>
         </ScrollView>
     );
 };

@@ -5,7 +5,7 @@ export default StyleSheet.create({
 
     wrapper: {
         flex: 1,
-        marginTop: 100
+        marginTop: 100,
     },
     title: {
         fontSize: 30,
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     },
 
     input: {
-        backgroundColor: colors.light,
+        backgroundColor: colors.grey,
         borderRadius: 25,
         padding: 15,
         width: "100%",

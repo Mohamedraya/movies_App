@@ -1,14 +1,15 @@
 import React ,{useEffect}from "react";
 import {View,Text,Image} from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {authentication} from "../../firebase/firebaseConfig";
 import styles from "./styles";
-import { onAuthStateChanged } from "firebase/auth";
+//import { onAuthStateChanged ,getAuth} from "firebase/auth";
+import {auth} from "../../firebase/firebaseConfig";
 
 
 function Splash () {
 
     const navigation = useNavigation();
+    //const auth = getAuth();
 
     useEffect(() => {
         NavigateToAuthOrHomeScreen()
@@ -16,9 +17,10 @@ function Splash () {
    
 
     function NavigateToAuthOrHomeScreen () {
-          setTimeout(function () {
-              onAuthStateChanged(authentication,(user) => {
-                  if (user != null) {
+          setTimeout( function  () {
+
+              auth.onAuthStateChanged((user) => {
+                  if (user) {
                       navigation.reset({
                           index: 0,
                           routes: [{name: "HomeScreen"}]
@@ -37,7 +39,7 @@ function Splash () {
 
     return (
         <View style={styles.container}>
-          <Text style={styles.splashText}>MovieTime</Text>
+          <Text style={styles.splashText}>movietime</Text>
         </View>
     );
 };
