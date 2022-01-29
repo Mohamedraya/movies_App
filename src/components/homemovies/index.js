@@ -1,5 +1,5 @@
 import React ,{useState,useEffect} from 'react';
-import {View,Text,FlatList,Image, ScrollView,Dimensions} from 'react-native';
+import {View,Text,FlatList,Image, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import HomeHeader from '../HomeHeader';
 import MovieItem from '../../components/movieitem';
@@ -40,6 +40,8 @@ const movies = [{
 ]
 
 
+
+
 function HomeMovies () {
 
     const [imgActive,setImgActive] = useState(0);
@@ -57,7 +59,7 @@ function HomeMovies () {
 
     useEffect(() => {
         axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=e7afa11e8652a24e75a9b127f4a9bc8e&language=en-US&page=1")
-             .then((response) => {setUpComing(response.data.results)})
+             .then((response) => {setUpComing(response.data.results);})
              .catch((error) => console.log(error))
      },[]);
 
@@ -77,7 +79,7 @@ function HomeMovies () {
             <HomeHeader/>
             <View style={styles.slide}>
                <ScrollView onScroll={({nativeEvent}) => onchange(nativeEvent)}
-                           showsHorizontalScrollIndicator={false}
+                           showsHorizontalScrollIndicator={false} 
                            pagingEnabled horizontal style={styles.slide}>
 
                     {
@@ -102,7 +104,7 @@ function HomeMovies () {
           </View>  
            
            <FlatList data={mostPopular} keyExtractor={item => item.id} horizontal
-           renderItem={({item}) => (<MovieItem name={item.title} rate={item.vote_average} imageUrl={item.poster_path}
+            renderItem={({item}) => (<MovieItem name={item.title} rate={item.vote_average} imageUrl={item.poster_path}
                                    onPress={() =>{navigation.navigate("MovieDetailsScreen")} }/>)}/>
           
           <View style={styles.wrapper}>

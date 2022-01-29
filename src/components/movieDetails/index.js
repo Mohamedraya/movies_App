@@ -37,26 +37,34 @@ const casts = [{
 
 function MovieDetails () {
 
-
+    //const movieId = route.params.id;
     const navigation = useNavigation();
-    //const [casts,setCasts] = useState([]);
-    const [movieDetails,setMovieDetails] = useState([]);
+    //const [casts,setCasts] = useState([]);634649
+    const [movieDetails,setMovieDetails] = useState({});
 
-   
+   useEffect(() => {
+       axios.get(`https://api.themoviedb.org/3/movie/634649?api_key=e7afa11e8652a24e75a9b127f4a9bc8e&language=en-US`)
+       .then((response) => {setMovieDetails(response.data)})
+       .catch((error) => console.log(error));
+   }, []);
 
 
     return (
         <ScrollView>
           <DetailsHeader/>  
-          <Image source={{uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz4dLuZsvF5o--DTrPSgQi2RKcQRHogV43iw&usqp=CAU"}} style={styles.backgimg}/>           
+          <Image source={{uri: "https://image.tmdb.org/t/p/w500/" + movieDetails.backdrop_path}} style={styles.backgimg}/>            
           <View style={styles.wrapper}>
-              <Image source={{uri: "https://i.ytimg.com/vi/MJuFdpVCcsY/movieposter_en.jpg"}} style={styles.img}/>
+              <Image source={{uri: "https://image.tmdb.org/t/p/w500/" + movieDetails.poster_path}} style={styles.img}/>
               <Text style={styles.movName}>Matrix Movie</Text>          
           </View>
-          <View style={styles.rateView}>      
-                <MaterialIcons name="star-rate" color={colors.yellow} size={23}/>
-                <Text style={styles.rateTxt}>7.4</Text>                                
-                <Ionicons name="time-outline" color={colors.dark} size={23} style={styles.icon}/>
+          <View style={styles.rateView}>
+              <View style={styles.stars}>     
+                <MaterialIcons name="star-rate" color={colors.yellow} size={21}/>
+              </View>   
+                <Text style={styles.rateTxt}>7.4</Text> 
+              <View style={styles.stars}>                                 
+                <Ionicons name="time-outline" color={colors.dark} size={21} style={styles.icon}/>
+              </View>  
                 <Text style={styles.rateTxt}>2h 36min</Text>                
           </View>
           <View style={styles.movType}>
@@ -105,5 +113,17 @@ export default MovieDetails;
 
 /*<Image source={{uri: "https://reactjs.org/logo-og.png"}} style={styles.backgimg}/>
 
-<AppHeader back optionalIcon="heart" optionalFun={()=>console.log("")}
-                     right="ellipsis-vertical" iconColor={colors.black} />*/
+
+"https://i.ytimg.com/vi/MJuFdpVCcsY/movieposter_en.jpg"
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz4dLuZsvF5o--DTrPSgQi2RKcQRHogV43iw&usqp=CAU"
+
+
+
+
+<View style={styles.container} >
+            <View style={styles.background} >
+             <Image style={styles.image} source={{uri: "https://image.tmdb.org/t/p/w500/" + movieDetails.backdrop_path}} />
+            </View>
+          </View> 
+*/
+//

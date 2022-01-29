@@ -41,6 +41,7 @@ function CastDetails () {
      },[]);
 
     return (
+        
         <ScrollView>
             <View style={styles.castInfo}>
                <Image source={{uri: "https://reactjs.org/logo-og.png"}} style={styles.img}/>
@@ -75,13 +76,14 @@ function CastDetails () {
                <Text style={styles.title}>MOST SUCCESSFUL MOVIES</Text>
                <Text style={styles.subTitle}>Show All</Text>
             </View>
-
+            
             <FlatList data={mostPopular} keyExtractor={item => item.id} horizontal
                       renderItem={({item}) => (<MovieItem name={item.title} imageUrl={item.poster_path} rate={item.vote_average}/>)}/>
         
             <Text style={styles.flatTitle}>ALL MOVIES</Text>
             <FlatList data={mostPopular} keyExtractor={item => item.id}
                       renderItem={({item}) => (<ListItem imageUrl={item.poster_path} title={item.title} rate={item.vote_average}/>)}/>
+        
         </ScrollView>
     );
 };

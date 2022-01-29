@@ -7,7 +7,7 @@ export default StyleSheet.create({
         height: 50,
         elevation: 4,
         alignItems: "center",
-        position: "absolute"
+        position: "absolute",
     },
 
 

@@ -20,7 +20,7 @@ function ListItem ({imageUrl,title,rate}) {
               </View>
               <View>
               <View style={styles.rateView}>
-                   <MaterialIcons name="star-rate" color={colors.yellow} size={25}/>
+                   <MaterialIcons name="star-rate" color={colors.yellow} size={23}/>
                    <Text style={styles.rateText}>{rate}</Text>
               </View>
               </View>

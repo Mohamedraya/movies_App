@@ -16,7 +16,7 @@ function DetailsHeader () {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <AntDesign name="left" size={24} color={colors.white}/>
+                    <AntDesign name="left" size={26} color={colors.white}/>
             </TouchableOpacity>
 
             
@@ -24,12 +24,12 @@ function DetailsHeader () {
             <View style={styles.iconView}>
                 <View style={styles.search}>
                 {<TouchableOpacity>
-                    <Feather name="heart" size={24} color={colors.white}/>
+                    <Feather name="heart" size={26} color={colors.white}/>
                  </TouchableOpacity>}
                 </View>
                 <View>
                 {<TouchableOpacity>
-                    <Ionicons name="ellipsis-vertical" size={24} color={colors.white}/>
+                    <Ionicons name="ellipsis-vertical" size={26} color={colors.white}/>
                  </TouchableOpacity>}
                 </View>
                  

@@ -8,7 +8,7 @@ export default StyleSheet.create({
     },
 
     splashText: {
-        fontSize: 30,
+        fontSize: 33,
         color: "red",
         fontWeight: "bold"
     }

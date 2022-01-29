@@ -1,14 +1,42 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet ,Dimensions} from "react-native";
 import colors from "../../assets/theme/colors";
 
 
 export default StyleSheet.create({
 
+    /*container: {
+        //alignSelf: 'center',
+        //marginTop: 100,
+        width: "100%",
+        //backgroundColor: "red",
+        overflow: 'hidden', // for hide the not important parts from circle
+        margin: 0,
+        height: 160,
+      },
+      background: { // this shape is a circle 
+        borderRadius: 110, // border borderRadius same as width and height
+        width: "100%",
+        height: 500,
+        //marginLeft: -100, // reposition the circle inside parent view
+        position: 'absolute',
+        bottom: 0, // show the bottom part of circle
+        overflow: 'hidden', // hide not important part of image
+        
+      },
+      image: {
+        height: 160, // same width and height for the container
+        width: "100%",
+        position: 'absolute', // position it in circle
+        bottom: 0, // position it in circle
+        //marginLeft: 100, // center it in main view same value as marginLeft for circle but positive
+      },*/
+
     backgimg: {
         width: "100%",
         height: 150,
-        borderBottomLeftRadius: 100,
-        borderBottomRightRadius: 100,        
+        borderBottomLeftRadius: 90,
+        borderBottomRightRadius: 90,
+              
     },
 
     wrapper: {
@@ -112,5 +140,8 @@ export default StyleSheet.create({
         paddingTop: 5
     },
 
+    stars: {
+        paddingTop: 6
+    }
     
 });

@@ -15,7 +15,7 @@ export default StyleSheet.create({
     rateView: {
         flexDirection: "row",
         paddingLeft: 120,
-        paddingBottom: 70
+        paddingBottom: 90
     },
 
     img: {
